@@ -1,0 +1,18 @@
+.selector-for-some-widget {
+    box-sizing: content-box;
+}
+
+.main-container {
+    margin: 20px;
+} 
+
+.btn .btn-primary{
+    color: grey;
+} 
+
+#modal-title{
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+
+}
