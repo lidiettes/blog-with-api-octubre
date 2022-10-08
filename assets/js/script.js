@@ -51,7 +51,7 @@ function getPost() {
                 post.innerHTML = `
                 <div class="shadow-lg p-3 mb-5 bg-body rounded w-70 main-container"  >
                     <div class="row row-cols-1 " >
-                        <div id= "main-title" class="col" type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        <div id= "main-title" class="col" type="button" onclick="getUsers()" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#post${i}">"${data[i].title}"
                         <i class="fa-solid fa-pen-to-square" style="margin-left:20px;"></i>
                         <i class="fa-solid fa-trash-can"></i> </div>
@@ -77,10 +77,14 @@ function getPost() {
                         <div class="modal-body">
                             <div id="modal-title" > "${data[i].title}"</div> 
                             <div id="modal-body"> "${data[i].body}" </div> 
-                            <div id="modal-user">"${data[i].username}"</div>
-                            <hr>
-                            <div id="container-comments"> <p>Comments</p></div>
+                            <div id="modal-user">
+                                <p> Names: </p>
                             </div>
+                            <hr>
+                            <div id="container-comments"> 
+                                <p class="p-comments">Comments</p>
+                            </div>
+                        </div>
                         <div class="modal-footer" >
                             <button id = "commentsButton" type="button" class="btn btn-primary" onclick="getComments()">Load comments</button>
                         </div> </div> </div> </div> 
@@ -102,9 +106,27 @@ function getComments() {
         for (let i = 0; i < 8; i++) {
         let comments = document.createElement("p");
         comments.innerHTML = `
-        ${data[i].body}
-        `
+                            ${data[i].body}
+                            `
         containerComments.appendChild(comments);
+        }
+        
+    })
+    
+}
+
+function getUsers() {
+
+    fetch("https://jsonplaceholder.typicode.com/users/")
+    .then(response => response.json())
+    .then(data => {
+        const containerName = document.getElementById("modal-user")
+        for (let i = 0; i < 8; i++) {
+        let nameUser = document.createElement("p");
+        nameUser.innerHTML = `
+                            ${data[i].name}
+                            `
+        containerName.appendChild(nameUser);
         }
         
     })
