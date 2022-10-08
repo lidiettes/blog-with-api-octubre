@@ -3,12 +3,44 @@
 const intro = document.getElementById("main-title")
 const containerIntro = document.getElementById("container-intro") 
 const containerModal = document.getElementById("container-modal")
+const containerComments = document.getElementById("container-comments")
+
+const userName = []; 
+const userId = [];
 
 
 //functions
 
+// function SaveUser(){
+//     fetch ("https://jsonplaceholder.typicode.com/users")
+//     .then (response => response.json())
+//     .then (data => {
+//         data.forEach (e => {
+//             userName.push(e.username)
+//             userId.push(e.id)
+//         })
+//     })
+
+// }
+
+
 function getPost() {
     
+
+    // async function getData(){
+    //     const urlUsers = "https://jsonplaceholder.typicode.com/users";
+    //     const urlComments = "https://jsonplaceholder.typicode.com/posts/:id/comments";
+
+    //     const responseUsers = await fetch(urlUsers)
+    //     const dataUsers = await responseUsers.json()
+
+    //     const responseComments = await fetch("https://jsonplaceholder.typicode.com/posts/:id/comments")
+    //     const data = await responseComments.json()
+
+    // }
+
+
+
     fetch("https://jsonplaceholder.typicode.com/posts")
 
         .then(response => response.json())
@@ -44,17 +76,39 @@ function getPost() {
                         <div class="modal-body">
                             <div id="modal-title" > "${data[i].title}"</div> 
                             <div id="modal-body"> "${data[i].body}" </div> 
-                            <div id="modal-user">"${data[i].userId}"</div>
+                            <div id="modal-user">"${data[i].username}"</div>
                             <hr>
                             <p>Comments</p></div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Load comments</button>
+                        <div class="modal-footer" id="container-comments">
+                            <button id = "commentsButton" type="button" class="btn btn-primary" >Load comments</button>
                         </div> </div> </div> </div> 
                 `
                 containerModal.appendChild(modal);
             }
         })
 }
-//steps
 
 getPost();
+
+const commentsButton = document.getElementById("commentsButton") 
+commentsButton.addEventListener('click', getComments);
+
+
+function getComments() {
+
+    fetch("https://jsonplaceholder.typicode.com/posts/:id/comments")
+
+    .then(response => response.json())
+    .then(data => {
+        for (let i = 0; i < 8; i++) {
+
+        let comments = document.createElement("div");
+        comments.innerHTML = `
+        <div id="container-comments">"${data[i].body}"</div>
+        `
+        }
+    })
+    containerComments.appendChild(comments);
+
+}
+
