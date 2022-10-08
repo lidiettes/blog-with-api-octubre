@@ -1,9 +1,11 @@
 //variables
 
+window.onload = getPost();
+
 const intro = document.getElementById("main-title")
 const containerIntro = document.getElementById("container-intro") 
 const containerModal = document.getElementById("container-modal")
-const containerComments = document.getElementById("container-comments")
+
 
 const userName = []; 
 const userId = [];
@@ -38,7 +40,6 @@ function getPost() {
     //     const data = await responseComments.json()
 
     // }
-
 
 
     fetch("https://jsonplaceholder.typicode.com/posts")
@@ -78,9 +79,10 @@ function getPost() {
                             <div id="modal-body"> "${data[i].body}" </div> 
                             <div id="modal-user">"${data[i].username}"</div>
                             <hr>
-                            <p>Comments</p></div>
-                        <div class="modal-footer" id="container-comments">
-                            <button id = "commentsButton" type="button" class="btn btn-primary" >Load comments</button>
+                            <div id="container-comments"> <p>Comments</p></div>
+                            </div>
+                        <div class="modal-footer" >
+                            <button id = "commentsButton" type="button" class="btn btn-primary" onclick="getComments()">Load comments</button>
                         </div> </div> </div> </div> 
                 `
                 containerModal.appendChild(modal);
@@ -88,27 +90,24 @@ function getPost() {
         })
 }
 
-getPost();
 
-const commentsButton = document.getElementById("commentsButton") 
-commentsButton.addEventListener('click', getComments);
 
 
 function getComments() {
 
-    fetch("https://jsonplaceholder.typicode.com/posts/:id/comments")
-
+    fetch("https://jsonplaceholder.typicode.com/posts/1/comments")
     .then(response => response.json())
     .then(data => {
+        const containerComments = document.getElementById("container-comments")
         for (let i = 0; i < 8; i++) {
-
-        let comments = document.createElement("div");
+        let comments = document.createElement("p");
         comments.innerHTML = `
-        <div id="container-comments">"${data[i].body}"</div>
+        ${data[i].body}
         `
+        containerComments.appendChild(comments);
         }
+        
     })
-    containerComments.appendChild(comments);
-
+    
 }
 
