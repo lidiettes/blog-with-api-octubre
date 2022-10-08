@@ -1,15 +1,15 @@
 //variables
 
 const intro = document.getElementById("main-title")
-const containerIntro = document.getElementById("container-intro")
+const containerIntro = document.getElementById("container-intro") 
 const containerModal = document.getElementById("container-modal")
 
 
 //functions
 
 function getPost() {
-
-    fetch("http://localhost:3000/posts/")
+    
+    fetch("https://jsonplaceholder.typicode.com/posts")
 
         .then(response => response.json())
         .then(data => {
@@ -18,14 +18,14 @@ function getPost() {
                 post.innerHTML = `
                 <div class="shadow-lg p-3 mb-5 bg-body rounded w-70 main-container"  >
                     <div class="row row-cols-1 " >
-                         <div id= "main-title" class="col" type="button" class="btn btn-primary" data-bs-toggle="modal"
-                         data-bs-target="#post${i}">"${data[i].title}"
-                         <i class="fa-solid fa-pen-to-square" style="margin-left:20px;"></i>
-                         <i class="fa-solid fa-trash-can"></i> </div>
-                         
+                        <div id= "main-title" class="col" type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#post${i}">"${data[i].title}"
+                        <i class="fa-solid fa-pen-to-square" style="margin-left:20px;"></i>
+                        <i class="fa-solid fa-trash-can"></i> </div>
+                        
                     
-                     </div>
-                     
+                    </div>
+                    
                 </div>
                 `
                 containerIntro.appendChild(post);
