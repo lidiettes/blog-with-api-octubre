@@ -4,10 +4,18 @@
 
 .main-container {
     margin: 20px;
+ 
 } 
 
+.row{
+    display: flex;
+}
+i{
+    
+    float: right;
+}
 .btn .btn-primary{
-    color: grey;
+    color: rgb(233, 180, 250);
 } 
 
 #modal-title{
@@ -21,3 +29,7 @@
     font-weight: bold;
 }
 
+#commentsButton{
+    border: none;
+    background-color: rgb(36, 39, 38);
+}
